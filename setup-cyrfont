@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/bin/setfont -C /dev/$1 cyr-sun16

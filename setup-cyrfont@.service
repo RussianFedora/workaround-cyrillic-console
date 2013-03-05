@@ -1,0 +1,15 @@
+[Unit]
+Description=Cyrillic workaround on %I
+After=systemd-user-sessions.service plymouth-quit-wait.service
+After=getty@%i.service
+
+BindsTo=getty@%i.service
+Requires=getty@%i.service
+IgnoreOnIsolate=yes
+
+[Service]
+ExecStart=/usr/bin/setup-cyrfont %i
+Type=oneshot
+
+[Install]
+RequiredBy=getty@.service
