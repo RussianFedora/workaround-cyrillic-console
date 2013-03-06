@@ -3,12 +3,14 @@
 
 Name:           workaround-cyrillic-console
 Version:        1.0
-Release:        2%{?dist}
+Release:        4%{?dist}
 Summary:        This is package with workaround old bug with incorrectly russian consoles
 
 License:        GPLv3
 URL:            http://russianfedora.ru
-Source0:        %{name}-%{version}.tar.xz
+#Source0:        %{name}-%{version}.tar.xz
+Source0:        https://raw.github.com/elemc/%{name}/master/%{wcc_unitname}
+Source1:        https://raw.github.com/elemc/%{name}/master/README
 
 Requires:       systemd kbd
 BuildArch:      noarch
@@ -17,14 +19,14 @@ BuildArch:      noarch
 This is package with workaround old bug with incorrectly russian consoles
 
 %prep
-%setup -q
+cp %{SOURCE0} .
+cp %{SOURCE1} .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%make_install BINDIR=$RPM_BUILD_ROOT%{_bindir} UNITDIR=$RPM_BUILD_ROOT%{_unitdir}
+install -D -m 0644 -p %{SOURCE0} $RPM_BUILD_ROOT%{_unitdir}/%{wcc_unitname}
 
 %files
-%{_bindir}/%{wcc_name}
 %{_unitdir}/%{wcc_unitname}
 %doc README
 
@@ -52,6 +54,9 @@ fi
 %endif
 
 %changelog
+* Wed Mar 06 2013 Alexei Panov <me AT elemc DOT name> 1.0-3
+- Remove script and sources, move all in one .service
+
 * Wed Mar 06 2013 Alexei Panov <me AT elemc DOT name> 1.0-2
 - Enable service after install it
 
