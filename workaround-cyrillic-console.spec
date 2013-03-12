@@ -4,31 +4,33 @@
 Name:           workaround-cyrillic-console
 Version:        1.0
 Release:        4%{?dist}
-Summary:        This is package with workaround old bug with incorrectly russian consoles
+Summary:        This is package with workaround old bug with incorrectly Russian consoles
 
 License:        GPLv3
 URL:            http://russianfedora.ru
-#Source0:        %{name}-%{version}.tar.xz
-Source0:        https://raw.github.com/elemc/%{name}/master/%{wcc_unitname}
-Source1:        https://raw.github.com/elemc/%{name}/master/README
+Source0:        https://raw.github.com/RussianFedora/%{name}/master/%{wcc_unitname}
+Source1:        https://raw.github.com/RussianFedora/%{name}/master/README.md
 
 Requires:       systemd kbd
+
+Requires(post): systemd
+Requires(preun): systemd
+
 BuildArch:      noarch
 
 %description
-This is package with workaround old bug with incorrectly russian consoles
+This is package with workaround old bug with incorrectly Russian consoles
 
 %prep
 cp %{SOURCE0} .
 cp %{SOURCE1} .
 
+%build
+#nothing to build
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -D -m 0644 -p %{SOURCE0} $RPM_BUILD_ROOT%{_unitdir}/%{wcc_unitname}
-
-%files
-%{_unitdir}/%{wcc_unitname}
-%doc README
 
 %post
 %if 0%{?systemd_post:1}
@@ -53,7 +55,16 @@ if [ $1 = 0 ]; then
 fi
 %endif
 
+%files
+%{_unitdir}/%{wcc_unitname}
+%doc README.md
+
 %changelog
+* Tue Mar 12 2013 Arkady L. Shane <ashejn@russianfedora.ru> - 1.0-4.R
+- update spec file
+  added missing requires
+  update urls
+
 * Wed Mar 06 2013 Alexei Panov <me AT elemc DOT name> 1.0-3
 - Remove script and sources, move all in one .service
 
