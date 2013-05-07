@@ -8,7 +8,7 @@ Requires=getty@%i.service
 IgnoreOnIsolate=yes
 
 [Service]
-ExecStart=/usr/bin/setfont -C /dev/%i cyr-sun16
+ExecStart=/usr/bin/setfont -C /dev/%i latarcyrheb-sun16
 Type=oneshot
 
 [Install]

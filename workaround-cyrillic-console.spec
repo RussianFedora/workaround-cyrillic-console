@@ -3,7 +3,7 @@
 
 Name:           workaround-cyrillic-console
 Version:        1.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        This is package with workaround old bug with incorrectly Russian consoles
 
 License:        GPLv3
@@ -60,6 +60,9 @@ fi
 %doc README.md
 
 %changelog
+* Tue May  7 2013 Arkady L. Shane <ashejn@russianfedora.ru> - 1.0-5.R
+- set latarcyrheb-sun16 as default font
+
 * Tue Mar 12 2013 Arkady L. Shane <ashejn@russianfedora.ru> - 1.0-4.R
 - update spec file
   added missing requires
