@@ -3,7 +3,7 @@
 
 Name:           workaround-cyrillic-console
 Version:        1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        This is package with workaround old bug with incorrectly Russian consoles
 
 License:        GPLv3
@@ -12,6 +12,7 @@ Source0:        https://raw.github.com/RussianFedora/%{name}/master/%{wcc_unitna
 Source1:        https://raw.github.com/RussianFedora/%{name}/master/README.md
 
 Requires:       systemd kbd
+BuildRequires:  systemd-units
 
 Requires(post): systemd
 Requires(preun): systemd
@@ -65,6 +66,9 @@ fi
 %doc README.md
 
 %changelog
+* Mon Mar 02 2015 Alexei Panov <me AT elemc DOT name> 1.1-2.R
+- Added systemd-units to BuildRequires
+
 * Mon Mar 02 2015 Alexei Panov <me AT elemc DOT name> 1.1-1.R
 - Upgrade unit and spec for new reallity
 
