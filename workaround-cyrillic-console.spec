@@ -2,12 +2,12 @@
 %global         wcc_unitname    %{wcc_name}@.service
 
 Name:           workaround-cyrillic-console
-Version:        1.0
-Release:        5%{?dist}
+Version:        1.1
+Release:        1%{?dist}
 Summary:        This is package with workaround old bug with incorrectly Russian consoles
 
 License:        GPLv3
-URL:            http://russianfedora.ru
+URL:            http://ru.fedoracommunity.org
 Source0:        https://raw.github.com/RussianFedora/%{name}/master/%{wcc_unitname}
 Source1:        https://raw.github.com/RussianFedora/%{name}/master/README.md
 
@@ -42,7 +42,9 @@ if [ $1 = 1 ]; then
 fi
 %endif
 if [ $1 = 1 ]; then
-    /bin/systemctl enable %{wcc_unitname}
+    for i in {1..6}; do
+        /bin/systemctl enable %{wcc_name}@tty$i.service
+    done
 fi
 
 %preun
@@ -52,6 +54,9 @@ fi
 if [ $1 = 0 ]; then
     # Package removal, not upgrade
     /bin/systemctl --no-reload disable %{wcc_unitname} >/dev/null 2>&1 || :
+    for i in {1..6}; do
+        /bin/systemctl --no-reload disable %{wcc_name}@tty$i >/dev/null 2>&1 || :
+    done
 fi
 %endif
 
@@ -60,6 +65,9 @@ fi
 %doc README.md
 
 %changelog
+* Mon Mar 02 2015 Alexei Panov <me AT elemc DOT name> 1.1-1.R
+- Upgrade unit and spec for new reallity
+
 * Tue May  7 2013 Arkady L. Shane <ashejn@russianfedora.ru> - 1.0-5.R
 - set latarcyrheb-sun16 as default font
 
