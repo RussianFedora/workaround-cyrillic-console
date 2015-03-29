@@ -3,7 +3,7 @@
 
 Name:           workaround-cyrillic-console
 Version:        1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        This is package with workaround old bug with incorrectly Russian consoles
 
 License:        GPLv3
@@ -66,6 +66,9 @@ fi
 %doc README.md
 
 %changelog
+* Sun Mar 29 2015 Alexei Panov <me AT elemc DOT name> 1.1-3.R
+- Fix RF#1437 
+
 * Mon Mar 02 2015 Alexei Panov <me AT elemc DOT name> 1.1-2.R
 - Added systemd-units to BuildRequires
 
